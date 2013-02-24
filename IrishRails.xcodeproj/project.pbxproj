@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3E7EBCDF7384C55B0A7BC40 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA1D7459EBB94CF8B8EAC330 /* libPods.a */; settings = {}; };
 		EAAC33A516DA726600492859 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A416DA726600492859 /* UIKit.framework */; };
 		EAAC33A716DA726600492859 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A616DA726600492859 /* Foundation.framework */; };
 		EAAC33A916DA726600492859 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A816DA726600492859 /* CoreGraphics.framework */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A1FF891A6C4F4CF396E61782 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		EAAC33A116DA726600492859 /* IrishRails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IrishRails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAAC33A416DA726600492859 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EAAC33A616DA726600492859 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -37,6 +39,7 @@
 		EAAF85D816DA73EE00952BEA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		EAAF85D916DA73EE00952BEA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		EAAF85DA16DA73EE00952BEA /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		FA1D7459EBB94CF8B8EAC330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +50,7 @@
 				EAAC33A516DA726600492859 /* UIKit.framework in Frameworks */,
 				EAAC33A716DA726600492859 /* Foundation.framework in Frameworks */,
 				EAAC33A916DA726600492859 /* CoreGraphics.framework in Frameworks */,
+				B3E7EBCDF7384C55B0A7BC40 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +63,7 @@
 				EAAC33AA16DA726600492859 /* IrishRails */,
 				EAAC33A316DA726600492859 /* Frameworks */,
 				EAAC33A216DA726600492859 /* Products */,
+				A1FF891A6C4F4CF396E61782 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +81,7 @@
 				EAAC33A416DA726600492859 /* UIKit.framework */,
 				EAAC33A616DA726600492859 /* Foundation.framework */,
 				EAAC33A816DA726600492859 /* CoreGraphics.framework */,
+				FA1D7459EBB94CF8B8EAC330 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,6 +131,7 @@
 				EAAC339D16DA726600492859 /* Sources */,
 				EAAC339E16DA726600492859 /* Frameworks */,
 				EAAC339F16DA726600492859 /* Resources */,
+				A329212BC0374403BD7F5C16 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -154,6 +161,8 @@
 			mainGroup = EAAC339816DA726600492859;
 			productRefGroup = EAAC33A216DA726600492859 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+			);
 			projectRoot = "";
 			targets = (
 				EAAC33A016DA726600492859 /* IrishRails */,
@@ -175,6 +184,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A329212BC0374403BD7F5C16 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 1;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EAAC339D16DA726600492859 /* Sources */ = {
@@ -259,6 +286,7 @@
 		};
 		EAAC33BF16DA726600492859 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1FF891A6C4F4CF396E61782 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IrishRails/IrishRails-Prefix.pch";
@@ -270,6 +298,7 @@
 		};
 		EAAC33C016DA726600492859 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1FF891A6C4F4CF396E61782 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IrishRails/IrishRails-Prefix.pch";
