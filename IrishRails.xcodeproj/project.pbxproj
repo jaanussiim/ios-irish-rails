@@ -16,6 +16,8 @@
 		EAAC33B716DA726600492859 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAC33B616DA726600492859 /* Default.png */; };
 		EAAC33B916DA726600492859 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAC33B816DA726600492859 /* Default@2x.png */; };
 		EAAC33BB16DA726600492859 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAC33BA16DA726600492859 /* Default-568h@2x.png */; };
+		EAAF85DB16DA73EE00952BEA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAF85D916DA73EE00952BEA /* MainViewController.m */; };
+		EAAF85DC16DA73EE00952BEA /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAAF85DA16DA73EE00952BEA /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,9 @@
 		EAAC33B616DA726600492859 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		EAAC33B816DA726600492859 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EAAC33BA16DA726600492859 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		EAAF85D816DA73EE00952BEA /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		EAAF85D916DA73EE00952BEA /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		EAAF85DA16DA73EE00952BEA /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +83,10 @@
 		EAAC33AA16DA726600492859 /* IrishRails */ = {
 			isa = PBXGroup;
 			children = (
+				EAAC33AB16DA726600492859 /* Supporting Files */,
+				EAAF85D716DA73CC00952BEA /* ViewControllers */,
 				EAAC33B316DA726600492859 /* AppDelegate.h */,
 				EAAC33B416DA726600492859 /* AppDelegate.m */,
-				EAAC33AB16DA726600492859 /* Supporting Files */,
 			);
 			path = IrishRails;
 			sourceTree = "<group>";
@@ -97,6 +103,16 @@
 				EAAC33BA16DA726600492859 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAAF85D716DA73CC00952BEA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EAAF85D816DA73EE00952BEA /* MainViewController.h */,
+				EAAF85D916DA73EE00952BEA /* MainViewController.m */,
+				EAAF85DA16DA73EE00952BEA /* MainViewController.xib */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +170,7 @@
 				EAAC33B716DA726600492859 /* Default.png in Resources */,
 				EAAC33B916DA726600492859 /* Default@2x.png in Resources */,
 				EAAC33BB16DA726600492859 /* Default-568h@2x.png in Resources */,
+				EAAF85DC16DA73EE00952BEA /* MainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +183,7 @@
 			files = (
 				EAAC33B116DA726600492859 /* main.m in Sources */,
 				EAAC33B516DA726600492859 /* AppDelegate.m in Sources */,
+				EAAF85DB16DA73EE00952BEA /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +298,7 @@
 				EAAC33C016DA726600492859 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
