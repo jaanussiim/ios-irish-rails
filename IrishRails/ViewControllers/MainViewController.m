@@ -37,6 +37,9 @@ NSString *const kStationDataCellIentifier = @"kStationDataCellIentifier";
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, assign) NSUInteger checkedStationIndex;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
+
+- (IBAction)refreshPressed:(id)sender;
 
 @end
 
@@ -61,6 +64,8 @@ NSString *const kStationDataCellIentifier = @"kStationDataCellIentifier";
   [self setDefaultLocation];
 
   [self.tableView registerNib:[UINib nibWithNibName:@"StationDataCell" bundle:nil] forCellReuseIdentifier:kStationDataCellIentifier];
+  [self.navigationItem setTitle:NSLocalizedString(@"main.controller.title", nil)];
+  [self.navigationItem setRightBarButtonItem:self.refreshButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,7 +113,7 @@ NSString *const kStationDataCellIentifier = @"kStationDataCellIentifier";
 - (void)pullNearestTrainTimes {
   JSLog(@"pullNearestTrainTimes");
 
-  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
   [self setHud:hud];
 
   [hud setLabelText:NSLocalizedString(@"checking.location", nil)];
@@ -241,6 +246,10 @@ NSString *const kStationDataCellIentifier = @"kStationDataCellIentifier";
 - (void)setDefaultLocation {
   //Set location to Dublin
   [self setLocation:[[CLLocation alloc] initWithLatitude:53.347778 longitude:-6.259722]];
+}
+
+- (IBAction)refreshPressed:(id)sender {
+  [self pullNearestTrainTimes];
 }
 
 @end

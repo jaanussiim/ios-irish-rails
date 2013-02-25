@@ -6,6 +6,8 @@
 
 "location.error" = "Error getting location. Will use Dublin as default.";
 
+"main.controller.title" = "Irish Rail";
+
 "pulling.stations" = "Pulling stations...";
 
 "station.data.pull.error" = "Could not pull station data";
