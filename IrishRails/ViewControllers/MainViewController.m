@@ -15,10 +15,16 @@
  */
 
 #import "MainViewController.h"
+#import "Constants.h"
+#import "MBProgressHUD.h"
+#import "PullAllStations.h"
 
 @interface MainViewController ()
 
+@property (nonatomic, strong) NSArray *stations;
 @property (nonatomic, strong) NSArray *trainTimes;
+@property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) NetworkOperation *runningOperation;
 
 @end
 
@@ -47,6 +53,14 @@
   // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+
+  if ([self.trainTimes count] == 0) {
+    [self pullNearestTrainTimes];
+  }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -72,6 +86,30 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+}
+
+- (void)pullNearestTrainTimes {
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [self setHud:hud];
+
+  JSLog(@"pullNearestTrainTimes");
+  if ([self.stations count] == 0) {
+    [self pullAllStations];
+  } else {
+
+  }
+}
+
+- (void)pullAllStations {
+  JSLog(@"pullAllStations");
+  PullAllStations *pullStations = [[PullAllStations alloc] init];
+  [self executeOperation:pullStations];
+}
+
+- (void)executeOperation:(NetworkOperation *)operation {
+  [self setRunningOperation:operation];
+  [self.hud setLabelText:[operation activityDescription]];
+  [operation start];
 }
 
 @end

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		B3E7EBCDF7384C55B0A7BC40 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA1D7459EBB94CF8B8EAC330 /* libPods.a */; };
 		EA95C73016DA7A7E000F069C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C72F16DA7A7E000F069C /* MBProgressHUD.m */; };
+		EA95C73516DA7E69000F069C /* NetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C73416DA7E69000F069C /* NetworkOperation.m */; };
+		EA95C73816DA7E7D000F069C /* PullAllStations.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C73716DA7E7D000F069C /* PullAllStations.m */; };
+		EA95C73B16DA7EE8000F069C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA95C73916DA7EE8000F069C /* Localizable.strings */; };
 		EAAC33A516DA726600492859 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A416DA726600492859 /* UIKit.framework */; };
 		EAAC33A716DA726600492859 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A616DA726600492859 /* Foundation.framework */; };
 		EAAC33A916DA726600492859 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A816DA726600492859 /* CoreGraphics.framework */; };
@@ -26,6 +29,12 @@
 		A1FF891A6C4F4CF396E61782 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		EA95C72E16DA7A7E000F069C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EA95C72F16DA7A7E000F069C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		EA95C73116DA7D3E000F069C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		EA95C73316DA7E69000F069C /* NetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperation.h; sourceTree = "<group>"; };
+		EA95C73416DA7E69000F069C /* NetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkOperation.m; sourceTree = "<group>"; };
+		EA95C73616DA7E7D000F069C /* PullAllStations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullAllStations.h; sourceTree = "<group>"; };
+		EA95C73716DA7E7D000F069C /* PullAllStations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullAllStations.m; sourceTree = "<group>"; };
+		EA95C73A16DA7EE8000F069C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EAAC33A116DA726600492859 /* IrishRails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IrishRails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAAC33A416DA726600492859 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EAAC33A616DA726600492859 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,6 +86,20 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		EA95C73216DA7DF1000F069C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EA95C73316DA7E69000F069C /* NetworkOperation.h */,
+				EA95C73416DA7E69000F069C /* NetworkOperation.m */,
+				EA95C73616DA7E7D000F069C /* PullAllStations.h */,
+				EA95C73716DA7E7D000F069C /* PullAllStations.m */,
+			);
+			indentWidth = 2;
+			path = Network;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			wrapsLines = 0;
+		};
 		EAAC339816DA726600492859 = {
 			isa = PBXGroup;
 			children = (
@@ -110,10 +133,12 @@
 		EAAC33AA16DA726600492859 /* IrishRails */ = {
 			isa = PBXGroup;
 			children = (
+				EA95C73216DA7DF1000F069C /* Network */,
 				EAAC33AB16DA726600492859 /* Supporting Files */,
 				EAAF85D716DA73CC00952BEA /* ViewControllers */,
 				EAAC33B316DA726600492859 /* AppDelegate.h */,
 				EAAC33B416DA726600492859 /* AppDelegate.m */,
+				EA95C73116DA7D3E000F069C /* Constants.h */,
 			);
 			path = IrishRails;
 			sourceTree = "<group>";
@@ -121,13 +146,14 @@
 		EAAC33AB16DA726600492859 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EAAC33AC16DA726600492859 /* IrishRails-Info.plist */,
-				EAAC33AD16DA726600492859 /* InfoPlist.strings */,
-				EAAC33B016DA726600492859 /* main.m */,
-				EAAC33B216DA726600492859 /* IrishRails-Prefix.pch */,
+				EAAC33BA16DA726600492859 /* Default-568h@2x.png */,
 				EAAC33B616DA726600492859 /* Default.png */,
 				EAAC33B816DA726600492859 /* Default@2x.png */,
-				EAAC33BA16DA726600492859 /* Default-568h@2x.png */,
+				EAAC33AD16DA726600492859 /* InfoPlist.strings */,
+				EAAC33AC16DA726600492859 /* IrishRails-Info.plist */,
+				EAAC33B216DA726600492859 /* IrishRails-Prefix.pch */,
+				EA95C73916DA7EE8000F069C /* Localizable.strings */,
+				EAAC33B016DA726600492859 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -199,6 +225,7 @@
 				EAAC33B916DA726600492859 /* Default@2x.png in Resources */,
 				EAAC33BB16DA726600492859 /* Default-568h@2x.png in Resources */,
 				EAAF85DC16DA73EE00952BEA /* MainViewController.xib in Resources */,
+				EA95C73B16DA7EE8000F069C /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,12 +257,22 @@
 				EAAC33B516DA726600492859 /* AppDelegate.m in Sources */,
 				EAAF85DB16DA73EE00952BEA /* MainViewController.m in Sources */,
 				EA95C73016DA7A7E000F069C /* MBProgressHUD.m in Sources */,
+				EA95C73516DA7E69000F069C /* NetworkOperation.m in Sources */,
+				EA95C73816DA7E7D000F069C /* PullAllStations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		EA95C73916DA7EE8000F069C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA95C73A16DA7EE8000F069C /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		EAAC33AD16DA726600492859 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -311,6 +348,7 @@
 				GCC_PREFIX_HEADER = "IrishRails/IrishRails-Prefix.pch";
 				INFOPLIST_FILE = "IrishRails/IrishRails-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -323,6 +361,7 @@
 				GCC_PREFIX_HEADER = "IrishRails/IrishRails-Prefix.pch";
 				INFOPLIST_FILE = "IrishRails/IrishRails-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
