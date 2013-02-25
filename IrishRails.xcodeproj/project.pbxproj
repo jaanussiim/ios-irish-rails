@@ -12,6 +12,7 @@
 		EA95C73516DA7E69000F069C /* NetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C73416DA7E69000F069C /* NetworkOperation.m */; };
 		EA95C73816DA7E7D000F069C /* PullAllStations.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C73716DA7E7D000F069C /* PullAllStations.m */; };
 		EA95C73B16DA7EE8000F069C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA95C73916DA7EE8000F069C /* Localizable.strings */; };
+		EA95C73F16DB2D29000F069C /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C73E16DB2D29000F069C /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EAAC33A516DA726600492859 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A416DA726600492859 /* UIKit.framework */; };
 		EAAC33A716DA726600492859 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A616DA726600492859 /* Foundation.framework */; };
 		EAAC33A916DA726600492859 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAC33A816DA726600492859 /* CoreGraphics.framework */; };
@@ -35,6 +36,8 @@
 		EA95C73616DA7E7D000F069C /* PullAllStations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullAllStations.h; sourceTree = "<group>"; };
 		EA95C73716DA7E7D000F069C /* PullAllStations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullAllStations.m; sourceTree = "<group>"; };
 		EA95C73A16DA7EE8000F069C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EA95C73D16DB2D29000F069C /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		EA95C73E16DB2D29000F069C /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		EAAC33A116DA726600492859 /* IrishRails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IrishRails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAAC33A416DA726600492859 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EAAC33A616DA726600492859 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,6 +75,7 @@
 		EA95C72C16DA7A7E000F069C /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				EA95C73C16DB2D1E000F069C /* GDataXML */,
 				EA95C72D16DA7A7E000F069C /* MBProgressHUD */,
 			);
 			path = Thirdparty;
@@ -99,6 +103,15 @@
 			sourceTree = "<group>";
 			tabWidth = 2;
 			wrapsLines = 0;
+		};
+		EA95C73C16DB2D1E000F069C /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				EA95C73D16DB2D29000F069C /* GDataXMLNode.h */,
+				EA95C73E16DB2D29000F069C /* GDataXMLNode.m */,
+			);
+			path = GDataXML;
+			sourceTree = "<group>";
 		};
 		EAAC339816DA726600492859 = {
 			isa = PBXGroup;
@@ -259,6 +272,7 @@
 				EA95C73016DA7A7E000F069C /* MBProgressHUD.m in Sources */,
 				EA95C73516DA7E69000F069C /* NetworkOperation.m in Sources */,
 				EA95C73816DA7E7D000F069C /* PullAllStations.m in Sources */,
+				EA95C73F16DB2D29000F069C /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +360,19 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IrishRails/IrishRails-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "IrishRails/IrishRails-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					SystemConfiguration,
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -359,7 +385,19 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IrishRails/IrishRails-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "IrishRails/IrishRails-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					SystemConfiguration,
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
