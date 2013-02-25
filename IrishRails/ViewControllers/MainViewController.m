@@ -22,8 +22,11 @@
 #import "Station.h"
 #import "PullStationData.h"
 #import "StationData.h"
+#import "StationDataCell.h"
 
 static NSUInteger const kNumberOfTmesToShow = 10;
+
+NSString *const kStationDataCellIentifier = @"kStationDataCellIentifier";
 
 @interface MainViewController () <CLLocationManagerDelegate>
 
@@ -56,6 +59,8 @@ static NSUInteger const kNumberOfTmesToShow = 10;
   [self setLocationManager:locationManager];
 
   [self setDefaultLocation];
+
+  [self.tableView registerNib:[UINib nibWithNibName:@"StationDataCell" bundle:nil] forCellReuseIdentifier:kStationDataCellIentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,23 +92,17 @@ static NSUInteger const kNumberOfTmesToShow = 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"Cell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-  }
+  StationDataCell *cell = [tableView dequeueReusableCellWithIdentifier:kStationDataCellIentifier];
 
   StationData *data = [self.trainTimes objectAtIndex:indexPath.row];
-  [cell.textLabel setText:data.station.name];
-
-  [cell.detailTextLabel setText:data.dueIn];
+  [cell configureWithData:data];
 
   return cell;
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)pullNearestTrainTimes {
@@ -128,6 +127,7 @@ static NSUInteger const kNumberOfTmesToShow = 10;
     dispatch_async(dispatch_get_main_queue(), ^{
       if (error) {
         [self showError:NSLocalizedString(@"stations.pull.error", nil)];
+        [self.hud hide:YES];
         return;
       }
 
@@ -181,6 +181,7 @@ static NSUInteger const kNumberOfTmesToShow = 10;
       dispatch_async(dispatch_get_main_queue(), ^{
         if (error) {
           [self showError:NSLocalizedString(@"station.data.pull.error", nil)];
+          [self.hud hide:YES];
           return;
         }
 

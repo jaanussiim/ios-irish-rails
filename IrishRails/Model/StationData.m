@@ -37,6 +37,8 @@
 
     [data setStation:station];
     [data setDueIn:[dataElement firstValueForField:@"Duein"]];
+    [data setOrigin:[dataElement firstValueForField:@"Origin"]];
+    [data setDestination:[dataElement firstValueForField:@"Destination"]];
 
     [result addObject:data];
   }

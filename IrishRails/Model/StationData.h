@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) Station *station;
 @property (nonatomic, copy) NSString *dueIn;
+@property (nonatomic, copy) NSString *origin;
+@property (nonatomic, copy) NSString *destination;
 
 + (NSArray *)readStationData:(GDataXMLDocument *)doc forStation:(Station *)station;
 

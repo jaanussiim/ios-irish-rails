@@ -10,6 +10,8 @@
 		B3E7EBCDF7384C55B0A7BC40 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA1D7459EBB94CF8B8EAC330 /* libPods.a */; };
 		EA6154F016DB3EE500519AF2 /* StationData.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6154EF16DB3EE500519AF2 /* StationData.m */; };
 		EA6154F316DB3EFA00519AF2 /* PullStationData.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6154F216DB3EFA00519AF2 /* PullStationData.m */; };
+		EA6154F716DB49CB00519AF2 /* StationDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6154F616DB49CB00519AF2 /* StationDataCell.m */; };
+		EA6154F916DB49DF00519AF2 /* StationDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6154F816DB49DF00519AF2 /* StationDataCell.xib */; };
 		EA95C73016DA7A7E000F069C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C72F16DA7A7E000F069C /* MBProgressHUD.m */; };
 		EA95C73516DA7E69000F069C /* NetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C73416DA7E69000F069C /* NetworkOperation.m */; };
 		EA95C73816DA7E7D000F069C /* PullAllStations.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95C73716DA7E7D000F069C /* PullAllStations.m */; };
@@ -37,6 +39,9 @@
 		EA6154EF16DB3EE500519AF2 /* StationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationData.m; sourceTree = "<group>"; };
 		EA6154F116DB3EFA00519AF2 /* PullStationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullStationData.h; sourceTree = "<group>"; };
 		EA6154F216DB3EFA00519AF2 /* PullStationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullStationData.m; sourceTree = "<group>"; };
+		EA6154F516DB49CB00519AF2 /* StationDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationDataCell.h; sourceTree = "<group>"; };
+		EA6154F616DB49CB00519AF2 /* StationDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationDataCell.m; sourceTree = "<group>"; };
+		EA6154F816DB49DF00519AF2 /* StationDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationDataCell.xib; sourceTree = "<group>"; };
 		EA95C72E16DA7A7E000F069C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EA95C72F16DA7A7E000F069C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA95C73116DA7D3E000F069C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -87,6 +92,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA6154F416DB49B700519AF2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EA6154F516DB49CB00519AF2 /* StationDataCell.h */,
+				EA6154F616DB49CB00519AF2 /* StationDataCell.m */,
+				EA6154F816DB49DF00519AF2 /* StationDataCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		EA95C72C16DA7A7E000F069C /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				EA95C74616DB3313000F069C /* Categories */,
+				EA6154F416DB49B700519AF2 /* Cells */,
 				EA95C74016DB2E18000F069C /* Model */,
 				EA95C73216DA7DF1000F069C /* Network */,
 				EAAC33AB16DA726600492859 /* Supporting Files */,
@@ -279,6 +295,7 @@
 				EAAC33BB16DA726600492859 /* Default-568h@2x.png in Resources */,
 				EAAF85DC16DA73EE00952BEA /* MainViewController.xib in Resources */,
 				EA95C73B16DA7EE8000F069C /* Localizable.strings in Resources */,
+				EA6154F916DB49DF00519AF2 /* StationDataCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +334,7 @@
 				EA95C74916DB33E4000F069C /* GDataXMLElement+Helpers.m in Sources */,
 				EA6154F016DB3EE500519AF2 /* StationData.m in Sources */,
 				EA6154F316DB3EFA00519AF2 /* PullStationData.m in Sources */,
+				EA6154F716DB49CB00519AF2 /* StationDataCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
