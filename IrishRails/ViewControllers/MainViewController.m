@@ -14,17 +14,26 @@
  * limitations under the License.
  */
 
+#import <CoreLocation/CoreLocation.h>
 #import "MainViewController.h"
 #import "Constants.h"
 #import "MBProgressHUD.h"
 #import "PullAllStations.h"
+#import "Station.h"
+#import "PullStationData.h"
+#import "StationData.h"
 
-@interface MainViewController ()
+static NSUInteger const kNumberOfTmesToShow = 10;
+
+@interface MainViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSArray *stations;
 @property (nonatomic, strong) NSArray *trainTimes;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NetworkOperation *runningOperation;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, assign) NSUInteger checkedStationIndex;
 
 @end
 
@@ -41,17 +50,23 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  // Uncomment the following line to preserve selection between presentations.
-  // self.clearsSelectionOnViewWillAppear = NO;
+  CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+  [locationManager setDelegate:self];
+  [locationManager setDesiredAccuracy:kCLLocationAccuracyThreeKilometers];
+  [self setLocationManager:locationManager];
 
-  // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-  // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  [self setDefaultLocation];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
@@ -75,10 +90,13 @@
   static NSString *CellIdentifier = @"Cell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   }
 
-  // Configure the cell...
+  StationData *data = [self.trainTimes objectAtIndex:indexPath.row];
+  [cell.textLabel setText:data.station.name];
+
+  [cell.detailTextLabel setText:data.dueIn];
 
   return cell;
 }
@@ -89,11 +107,19 @@
 }
 
 - (void)pullNearestTrainTimes {
+  JSLog(@"pullNearestTrainTimes");
+
   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [self setHud:hud];
 
-  JSLog(@"pullNearestTrainTimes");
-  [self pullAllStations];
+  [hud setLabelText:NSLocalizedString(@"checking.location", nil)];
+
+  [self setTrainTimes:[NSArray array]];
+  [self checkLocation];
+}
+
+- (void)checkLocation {
+  [self.locationManager startUpdatingLocation];
 }
 
 - (void)pullAllStations {
@@ -101,7 +127,7 @@
   PullAllStations *pullStations = [[PullAllStations alloc] initWithCompletionHandler:^(NSArray *stations, NSError *error) {
     dispatch_async(dispatch_get_main_queue(), ^{
       if (error) {
-        [self showError:error];
+        [self showError:NSLocalizedString(@"stations.pull.error", nil)];
         return;
       }
 
@@ -113,9 +139,9 @@
   [self executeOperation:pullStations];
 }
 
-- (void)showError:(NSError *)error {
+- (void)showError:(NSString *)errorMessage {
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"data.retrieve.error.message.title", nil)
-                                                      message:[error localizedDescription]
+                                                      message:errorMessage
                                                      delegate:nil
                                             cancelButtonTitle:NSLocalizedString(@"button.title.ok", nil)
                                             otherButtonTitles:nil];
@@ -124,7 +150,66 @@
 
 - (void)orderStationsByDistance {
   dispatch_async(dispatch_get_main_queue(), ^{
+    JSLog(@"orderStationsByDistance");
+    JSLog(@"Location:%@", self.location);
+    CLLocation *userLocation = self.location;
+    NSArray *sorted = [self.stations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+      Station *one = obj1;
+      Station *two = obj2;
 
+      CLLocation *locationOne = [one location];
+      CLLocation *locationTwo = [two location];
+
+      CLLocationDistance distanceOne = [userLocation distanceFromLocation:locationOne];
+      CLLocationDistance distanceTwo = [userLocation distanceFromLocation:locationTwo];
+
+      return [[NSNumber numberWithDouble:distanceOne] compare:[NSNumber numberWithDouble:distanceTwo]];
+    }];
+
+    [self setStations:sorted];
+
+    [self pullDataForStationAtIndex:0];
+  });
+}
+
+- (void)pullDataForStationAtIndex:(NSUInteger)stationIndex {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self setCheckedStationIndex:stationIndex];
+    Station *station = [self.stations objectAtIndex:stationIndex];
+
+    PullStationData *stationData = [[PullStationData alloc] initWithStation:station completionHandler:^(NSArray *data, NSError *error) {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if (error) {
+          [self showError:NSLocalizedString(@"station.data.pull.error", nil)];
+          return;
+        }
+
+        [self appendStationData:data];
+      });
+    }];
+    [self executeOperation:stationData];
+  });
+}
+
+- (void)appendStationData:(NSArray *)array {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    NSMutableArray *presentData = [NSMutableArray arrayWithArray:self.trainTimes];
+    [presentData addObjectsFromArray:array];
+    [presentData sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+      StationData *one = obj1;
+      StationData *two = obj2;
+
+      return [one.dueIn compare:two.dueIn options:NSNumericSearch];
+    }];
+
+    [self setTrainTimes:[NSArray arrayWithArray:presentData]];
+    [self.tableView reloadData];
+
+    if ([self.trainTimes count] < kNumberOfTmesToShow) {
+      [self pullDataForStationAtIndex:self.checkedStationIndex + 1];
+    } else {
+      [self.hud hide:YES];
+    }
   });
 }
 
@@ -132,6 +217,29 @@
   [self setRunningOperation:operation];
   [self.hud setLabelText:[operation activityDescription]];
   [operation start];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+  [self setLocation:newLocation];
+
+  JSLog(@"didUpdateToLocation:%@", newLocation);
+
+  if ([newLocation horizontalAccuracy] <= 3000) {
+    [self.locationManager stopUpdatingLocation];
+    [self pullAllStations];
+  }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+  JSLog(@"didFailWithError:%@", error);
+  [self showError:NSLocalizedString(@"location.error", nil)];
+  [self setDefaultLocation];
+  [self pullAllStations];
+}
+
+- (void)setDefaultLocation {
+  //Set location to Dublin
+  [self setLocation:[[CLLocation alloc] initWithLatitude:53.347778 longitude:-6.259722]];
 }
 
 @end

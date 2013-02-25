@@ -20,6 +20,12 @@
 #import "Constants.h"
 #import "GDataXMLElement+Helpers.h"
 
+@interface Station ()
+
+@property (nonatomic, strong) CLLocation *location;
+
+@end
+
 @implementation Station
 
 - (NSString *)description {
@@ -48,6 +54,14 @@
   }
 
   return [NSArray arrayWithArray:result];
+}
+
+- (CLLocation *)location {
+  if (!_location) {
+    [self setLocation:[[CLLocation alloc] initWithLatitude:self.coordinate.latitude longitude:self.coordinate.longitude]];
+  }
+
+  return _location;
 }
 
 @end

@@ -15,18 +15,15 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
 
 @class GDataXMLDocument;
+@class Station;
 
-@interface Station : NSObject
+@interface StationData : NSObject
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-@property (nonatomic, copy) NSString *code;
+@property (nonatomic, strong) Station *station;
+@property (nonatomic, copy) NSString *dueIn;
 
-+ (NSArray *)readStations:(GDataXMLDocument *)doc;
-
-- (CLLocation *)location;
++ (NSArray *)readStationData:(GDataXMLDocument *)doc forStation:(Station *)station;
 
 @end

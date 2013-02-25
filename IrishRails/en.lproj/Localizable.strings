@@ -1,5 +1,13 @@
 "button.title.ok" = "OK";
 
+"checking.location" = "Checking location...";
+
 "data.retrieve.error.message.title" = "Data pull error";
 
+"location.error" = "Error getting location. Will use Dublin as default.";
+
 "pulling.stations" = "Pulling stations...";
+
+"station.data.pull.error" = "Could not pull station data";
+
+"stations.pull.error" = "Stations pull error";
