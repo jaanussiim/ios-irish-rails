@@ -208,6 +208,11 @@ NSString *const kStationDataCellIentifier = @"kStationDataCellIentifier";
       return [one.dueIn compare:two.dueIn options:NSNumericSearch];
     }];
 
+    if ([presentData count] > kNumberOfTmesToShow) {
+      NSRange clipRange = NSMakeRange(0, kNumberOfTmesToShow);
+      [presentData setArray:[presentData subarrayWithRange:clipRange]];
+    }
+
     [self setTrainTimes:[NSArray arrayWithArray:presentData]];
     [self.tableView reloadData];
 
