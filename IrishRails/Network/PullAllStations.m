@@ -15,8 +15,24 @@
  */
 
 #import "PullAllStations.h"
+#import "GDataXMLNode.h"
+#import "Station.h"
+
+@interface PullAllStations ()
+
+@property (nonatomic, copy) PullStationsCompletionBlock completion;
+
+@end
 
 @implementation PullAllStations
+
+- (id)initWithCompletionHandler:(PullStationsCompletionBlock)completion {
+  self = [super init];
+  if (self) {
+    _completion = completion;
+  }
+  return self;
+}
 
 - (NSString *)activityDescription {
   return NSLocalizedString(@"pulling.stations", nil);
@@ -24,6 +40,15 @@
 
 - (void)start {
   [self fetchDataFromURL:[NSURL URLWithString:@"http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML"]];
+}
+
+- (void)parseResponse:(GDataXMLDocument *)document {
+  NSArray *stations = [Station readStations:document];
+  self.completion(stations, nil);
+}
+
+- (void)handleError:(NSError *)error {
+  self.completion(nil, error);
 }
 
 @end

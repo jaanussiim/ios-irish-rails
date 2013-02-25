@@ -17,6 +17,7 @@
 #import "NetworkOperation.h"
 #import "Constants.h"
 #import "AFHTTPRequestOperation.h"
+#import "GDataXMLNode.h"
 
 @implementation NetworkOperation
 
@@ -39,11 +40,27 @@
 
   [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject) {
     JSLog(@"Success:%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+    NSError *error = nil;
+    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:responseObject options:0 error:&error];
+    if (error) {
+      [self handleError:error];
+    } else {
+      [self parseResponse:doc];
+    }
   } failure:^(AFHTTPRequestOperation *op, NSError *error) {
     JSLog(@"Failure:%@", error);
+    [self handleError:error];
   }];
 
   [operation start];
+}
+
+- (void)handleError:(NSError *)error {
+  ABSTRACT_METHOD;
+}
+
+- (void)parseResponse:(GDataXMLDocument *)document {
+  ABSTRACT_METHOD;
 }
 
 @end

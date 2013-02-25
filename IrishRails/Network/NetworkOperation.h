@@ -16,10 +16,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class GDataXMLDocument;
+
 @interface NetworkOperation : NSObject
 
 - (NSString *)activityDescription;
 - (void)start;
 - (void)fetchDataFromURL:(NSURL *)url;
+- (void)parseResponse:(GDataXMLDocument *)document;
+- (void)handleError:(NSError *)error;
 
 @end

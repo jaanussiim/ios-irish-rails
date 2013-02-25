@@ -15,12 +15,16 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "NetworkOperation.h"
+#import <CoreLocation/CoreLocation.h>
 
-typedef void (^PullStationsCompletionBlock)(NSArray *stations, NSError *error);
+@class GDataXMLDocument;
 
-@interface PullAllStations : NetworkOperation
+@interface Station : NSObject
 
-- (id)initWithCompletionHandler:(PullStationsCompletionBlock)completion;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, copy) NSString *code;
+
++ (NSArray *)readStations:(GDataXMLDocument *)doc;
 
 @end

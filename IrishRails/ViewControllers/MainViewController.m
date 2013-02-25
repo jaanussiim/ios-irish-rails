@@ -93,17 +93,39 @@
   [self setHud:hud];
 
   JSLog(@"pullNearestTrainTimes");
-  if ([self.stations count] == 0) {
-    [self pullAllStations];
-  } else {
-
-  }
+  [self pullAllStations];
 }
 
 - (void)pullAllStations {
   JSLog(@"pullAllStations");
-  PullAllStations *pullStations = [[PullAllStations alloc] init];
+  PullAllStations *pullStations = [[PullAllStations alloc] initWithCompletionHandler:^(NSArray *stations, NSError *error) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if (error) {
+        [self showError:error];
+        return;
+      }
+
+      JSLog(@"%d stations pulled", [stations count]);
+      [self setStations:stations];
+      [self orderStationsByDistance];
+    });
+  }];
   [self executeOperation:pullStations];
+}
+
+- (void)showError:(NSError *)error {
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"data.retrieve.error.message.title", nil)
+                                                      message:[error localizedDescription]
+                                                     delegate:nil
+                                            cancelButtonTitle:NSLocalizedString(@"button.title.ok", nil)
+                                            otherButtonTitles:nil];
+  [alertView show];
+}
+
+- (void)orderStationsByDistance {
+  dispatch_async(dispatch_get_main_queue(), ^{
+
+  });
 }
 
 - (void)executeOperation:(NetworkOperation *)operation {

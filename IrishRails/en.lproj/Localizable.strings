@@ -1,1 +1,5 @@
+"button.title.ok" = "OK";
+
+"data.retrieve.error.message.title" = "Data pull error";
+
 "pulling.stations" = "Pulling stations...";
